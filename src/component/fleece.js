@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Sheep.css";
+import "./fleece.css";
 
-class Sheep extends React.Component {
+class Fleece extends React.Component {
   handleClick = () => {
     this.props.clickHandler(this.props.name);
   };
 
   render() {
     const className = [
-      "sheep",
+      "fleece",
       this.props.ram ? "ram" : "",
       this.props.branded ? "branded" : ""
     ];
@@ -23,10 +23,10 @@ class Sheep extends React.Component {
     );
   }
 }
-Sheep.propTypes = {
+Fleece.propTypes = {
   name: PropTypes.string,
   ram: PropTypes.bool,
   branded: PropTypes.bool,
   clickHandler: PropTypes.func
 };
-export default Sheep;
+export default Fleece;

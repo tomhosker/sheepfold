@@ -1,18 +1,21 @@
 import React from "react";
-import Display from "./Display";
-import Sheep from "./Sheep";
-import Button from "./Button";
+import Display from "./display";
+import Fleece from "./fleece";
+import Button from "./button";
 import execute from "../logic/execute";
-import "./App.css";
+import Flock from "../logic/flock";
+import Sheep from "../logic/sheep";
+import "./app.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
+      message: "Welcome to the fold!",
       sheep: null,
       last: null,
-      operation: null
+      flock: new Flock(),
+      breed: false
     };
   }
 
@@ -20,20 +23,56 @@ class App extends React.Component {
     this.setState(execute(this.state, buttonName));
   };
 
-  render() {
-    return (
+  renderSheep(sheep)
+  {
+    var name, result = "";
+    var ram, branded = false;
+
+    if(sheep.gender === 1)
+    {
+      name = "Ram #"+sheep.id;
+      ram = true;
+    }
+    else name = "Ewe #"+sheep.id;
+
+    if(sheep.branded === true) branded = true;
+
+    result = <Fleece name={name} ram={ram} branded={branded}
+                     clickHandler={this.handleClick} />
+
+    return(result);
+  }
+
+  renderFold()
+  {
+    var result = [];
+
+    for(var i = 0; i < this.state.flock.sheep.length; i++)
+    {
+      result.push(this.renderSheep(this.state.flock.sheep[i]))
+    }
+
+    return(result);
+  }
+
+  render()
+  {
+    var display = <Display value={this.state.message} />;
+    var fold = <div className="sheepfold">{this.renderFold()}</div>;
+
+    var result =
       <div className="component-app">
-        <Display value={this.state.message || "Welcome to the fold!"} />
-          <div className="divholder">
-            <div className="sheepfold">
-              <Sheep name="Ewe #1" clickHandler={this.handleClick} />
-            </div> <div className="mymenu">
-              <Button name="Brand" clickHandler={this.handleClick} />
-              <Button name="Breed" clickHandler={this.handleClick} />
-            </div>
+        {display}
+        <div className="divholder">
+          {fold}
+          <div className="mymenu">
+            <Button name="Brand" clickHandler={this.handleClick} />
+            <Button name="Breed" clickHandler={this.handleClick} />
           </div>
         </div>
-    );
+      </div>;
+
+    return(result);
   }
 }
 export default App;

@@ -1,8 +1,8 @@
-.sheep {
+.fleece {
   width: auto;
 }
 
-.sheep button {
+.fleece button {
   background-color: white;
   border: 0;
   font-size: 14pt;
@@ -11,10 +11,10 @@
   border: 10px solid pink;
 }
 
-.sheep.ram button {
+.fleece.ram button {
   border: 10px solid black;
 }
 
-.sheep.branded button {
+.fleece.branded button {
   border: 10px solid green;
 }
