@@ -4,7 +4,6 @@ import Fleece from "./fleece";
 import Button from "./button";
 import execute from "../logic/execute";
 import Flock from "../logic/flock";
-import Sheep from "../logic/sheep";
 import "./app.css";
 
 class App extends React.Component {
@@ -25,20 +24,21 @@ class App extends React.Component {
 
   renderSheep(sheep)
   {
-    var name, result = "";
-    var ram, branded = false;
+    var name = sheep.id.toString();
+    var text = "";
+    var result;
+    var ram = false;
+    var branded = sheep.branded;
 
     if(sheep.gender === 1)
     {
-      name = "Ram #"+sheep.id;
+      text = "Ram #";
       ram = true;
     }
-    else name = "Ewe #"+sheep.id;
+    else text = "Ewe #";
 
-    if(sheep.branded === true) branded = true;
-
-    result = <Fleece name={name} ram={ram} branded={branded}
-                     clickHandler={this.handleClick} />
+    result = <Fleece text={text} name={name} ram={ram} branded={branded}
+                     clickHandler={this.handleClick}/>;
 
     return(result);
   }
