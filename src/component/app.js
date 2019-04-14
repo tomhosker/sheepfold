@@ -11,10 +11,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       message: "Welcome to the fold!",
-      sheep: null,
-      last: null,
       flock: new Flock(),
-      breed: false
+      sheep: null
     };
   }
 
@@ -49,7 +47,7 @@ class App extends React.Component {
 
     for(var i = 0; i < this.state.flock.sheep.length; i++)
     {
-      result.push(this.renderSheep(this.state.flock.sheep[i]))
+      result.push(this.renderSheep(this.state.flock.sheep[i]));
     }
 
     return(result);

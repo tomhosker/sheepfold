@@ -4,19 +4,14 @@ export default class Flock
 {
   constructor()
   {
-    var adam = new Sheep(0, 1, -2, -1);
-    var eve = new Sheep(1, 0, -2, -1);
+    var adam = new Sheep(0, 1, -1, -1);
+    var eve = new Sheep(1, 0, -1, -1);
 
     this.sheep = [adam, eve];
+    this.sire = adam;
+    this.dam = eve;
 
-    this.sheep.push(new Sheep(2, 0, -2, -1));
-    this.sheep.push(new Sheep(3, 0, -2, -1));
-    this.sheep.push(new Sheep(4, 0, -2, -1));
-    this.sheep.push(new Sheep(5, 0, -2, -1));
-    this.sheep.push(new Sheep(6, 0, -2, -1));
-    this.sheep.push(new Sheep(7, 0, -2, -1));
-    this.sheep.push(new Sheep(8, 0, -2, -1));
-    this.sheep.push(new Sheep(9, 0, -2, -1));
+    this.test();
   }
 
   static coinToss()
@@ -36,66 +31,169 @@ export default class Flock
     return(-1);
   }
 
-  brand(id)
+  brand()
   {
+    var ran = Math.floor(Math.random()*this.sheep.length);
+    var noUnbrandedFlag = true;
+
     for(var i = 0; i < this.sheep.length; i++)
     {
-      if(this.sheep[i].id === id) this.sheep[i].branded = true;
+      if(this.sheep[i].branded === false)
+      {
+        noUnbrandedFlag = false;
+        break;
+      }
+    }
+    if(noUnbrandedFlag) return("No unbranded sheep left!");
+
+    if(this.sheep[ran].branded === true) return(this.brand());
+    else
+    {
+      this.sheep[ran].branded = true;
+      return("Branded!");
     }
   }
 
-  breed(id1, id2)
+  generateSire()
   {
-    var i1 = this.getSheepOrdinal(id1), i2 = this.getSheepOrdinal(id2);
+    var ran = Math.floor(Math.random()*this.sheep.length);
 
-    // No parthenogenesis.
-    if(id1 === id2) return("No parthenogenesis!");
-
-    // Parents must exist in flock.
-    if(i1 === -1) return("Bad sheep id: "+id1);
-    if(i2 === -1) return("Bad sheep id: "+id2);
-
-    // Branded sheep can't breed.
-    if(this.sheep[i1].branded || this.sheep[i2].branded)
+    if((this.sheep[ran].gender === 1) &&
+       (this.sheep[ran].branded === false))
     {
-      return("Branded sheep can't breed!");
+      this.sire = this.sheep[ran];
+    }
+    else this.generateSire();
+  }
+
+  generateDam()
+  {
+    var ran = Math.floor(Math.random()*this.sheep.length);
+
+    if((this.sheep[ran].gender === 0) &&
+       (this.sheep[ran].branded === false))
+    {
+      this.dam = this.sheep[ran];
+    }
+    else this.generateDam();
+  }
+
+  generateSireAndDam()
+  {
+    this.generateSire();
+    this.generateDam();
+
+    if(this.areParentChild(this.sire, this.dam) ||
+       this.areFullSiblings(this.sire, this.dam))
+    {
+      this.generateSireAndDam();
+    }
+  }
+
+  noSiresCheck()
+  {
+    for(var i = 0; i < this.sheep.length; i++)
+    {
+      if(this.sheep[i].gender === 1)
+      {
+        if(this.sheep[i].branded === false) return(false);
+      }
     }
 
-    var gender1 = this.sheep[i1].gender, gender2 = this.sheep[i2].gender;
+    return(true);
+  }
 
-    // Parents must be of opposite genders.
-    if(gender1 === gender2) return("No same-sex reproduction!");
-
-    var sire = -1, dam = -1;
-
-    if(gender1 === 1)
+  noDamsCheck()
+  {
+    for(var i = 0; i < this.sheep.length; i++)
     {
-      sire = id1;
-      dam = id2;
+      if(this.sheep[i].gender === 0)
+      {
+        if(this.sheep[i].branded === false) return(false);
+      }
     }
-    else
+
+    return(true);
+  }
+
+  areParentChild(left, right)
+  {
+    if((left.sire === right.id) || (left.dam === right.id) ||
+       (left.id === right.sire) || (left.id === right.dam))
     {
-      sire = id2;
-      dam = id1;
+      return(true);
     }
+    else return(false);
+  }
+
+  areFullSiblings(left, right)
+  {
+    if((left.sire === -1) || (left.dam === -1) ||
+       (right.sire === -1) || (right.dam === -1))
+    {
+      return(false);
+    }
+    else if((left.sire === right.sire) && (left.dam === right.dam))
+    {
+      return(true);
+    }
+    else return(false);
+  }
+
+  hasLegalMate(i)
+  {
+    var left = this.sheep[i];
+
+    if(this.sheep[i].branded === true) return(false);
+
+    for(var j = 0; j < this.sheep.length; j++)
+    {
+      if((i !== j) &&
+         (this.sheep[j].branded === false) &&
+         (this.areParentChild(left, this.sheep[j]) === false) &&
+         (this.areFullSiblings(left, this.sheep[j]) === false))
+      {
+        return(true);
+      }
+    }
+
+    return(false);
+  }
+
+  genePoolCheck()
+  {
+    for(var i = 0; i < this.sheep.length; i++)
+    {
+      if(this.hasLegalMate(i)) return(false);
+    }
+
+    return(true);
+  }
+
+  breed()
+  {
+    if(this.noSiresCheck()) return("No unbranded rams!");
+    if(this.noDamsCheck()) return("No unbranded ewes!");
+    if(this.genePoolCheck()) return("Insufficient gene pool!");
+
+    this.generateSireAndDam();
 
     // 50% chance of conception.
     var success = Flock.coinToss();
     if(success === 0) return("Better luck next time!");
 
-    // No (parental) incest.
-    if(this.sheep[i1].sire === id2 || this.sheep[i1].dam === id2 ||
-       this.sheep[i2].sire === id1 || this.sheep[i2].dam === id1)
-    {
-      return("No incest!");
-    }
-
     var lambID = this.sheep.length;
     var lambGender = Flock.coinToss();
-    var lamb = new Sheep(lambID, lambGender, sire, dam);
+    var lamb = new Sheep(lambID, lambGender, this.sire.id, this.dam.id);
 
     this.sheep.push(lamb);
 
     return("Breeding successful!");
+  }
+
+  test()
+  {
+    console.log("Run unit tests on class Flock.");
+    console.log("Tests passed!");
   }
 }
