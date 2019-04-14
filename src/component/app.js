@@ -12,7 +12,9 @@ class App extends React.Component {
     this.state = {
       message: "Welcome to the fold!",
       flock: new Flock(),
-      sheep: null
+      sheep: null,
+      newbieGender: "Ewe",
+      newbieName: ""
     };
   }
 
@@ -20,23 +22,34 @@ class App extends React.Component {
     this.setState(execute(this.state, buttonName));
   };
 
+  handleChange = event => {
+    var newState = this.state;
+    newState.newbieGender = event.target.value;
+    this.setState(newState);
+  };
+
+  handleTextChange = event => {
+    var newState = this.state;
+    newState.newbieName = event.target.value;
+    this.setState(newState);
+  };
+
   renderSheep(sheep)
   {
     var name = sheep.id.toString();
     var text = "";
-    var result;
     var ram = false;
     var branded = sheep.branded;
 
-    if(sheep.gender === 1)
-    {
-      text = "Ram #";
-      ram = true;
-    }
-    else text = "Ewe #";
+    if(sheep.name !== "") text = sheep.name;
+    else if(sheep.gender === 1) text = "Ram #"+name;
+    else text = "Ewe #"+name;
 
-    result = <Fleece text={text} name={name} ram={ram} branded={branded}
-                     clickHandler={this.handleClick}/>;
+    if(sheep.gender === 1) ram = true;
+
+    var result = <Fleece name={name} text={text}
+                         ram={ram} branded={branded}
+                         clickHandler={this.handleClick}/>;
 
     return(result);
   }
@@ -53,20 +66,45 @@ class App extends React.Component {
     return(result);
   }
 
+  renderMenu()
+  {
+    var message = "Adding a new sheep, sir? "+
+                  "Specify his/her name and gender below.";
+    var specifyNameText = <small>Name:</small>;
+    var specifyNameBox = <textarea value={this.state.value}
+                                   onChange={this.handleTextChange}/>;
+    var specifyGenderText = <small>Gender:</small>;
+    var specifyGenderSelect = <select value={this.state.gender}
+                                      onChange={this.handleChange}>
+                                <option value="Ewe">Ewe</option>
+                                <option value="Ram">Ram</option>
+                              </select>;
+
+    var result =
+      <div className="mymenu">
+        <Button name="Brand" clickHandler={this.handleClick}/>
+        <Button name="Breed" clickHandler={this.handleClick}/>
+        <Button name="Add" clickHandler={this.handleClick}/>
+        <p> {message} </p>
+        <p> {specifyNameText} {specifyNameBox} </p>
+        <p> {specifyGenderText} {specifyGenderSelect} </p>
+      </div>;
+
+    return(result);
+  }
+
   render()
   {
     var display = <Display value={this.state.message} />;
     var fold = <div className="sheepfold">{this.renderFold()}</div>;
+    var menu = this.renderMenu();
 
     var result =
       <div className="component-app">
         {display}
         <div className="divholder">
           {fold}
-          <div className="mymenu">
-            <Button name="Brand" clickHandler={this.handleClick} />
-            <Button name="Breed" clickHandler={this.handleClick} />
-          </div>
+          {menu}
         </div>
       </div>;
 

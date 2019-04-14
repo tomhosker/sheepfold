@@ -4,14 +4,14 @@ export default class Flock
 {
   constructor()
   {
-    var adam = new Sheep(0, 1, -1, -1);
-    var eve = new Sheep(1, 0, -1, -1);
+    var adam = new Sheep(0, "Adam", 1, -1, -1);
+    var eve = new Sheep(1, "Eve", 0, -1, -1);
 
     this.sheep = [adam, eve];
     this.sire = adam;
     this.dam = eve;
 
-    this.test();
+    //this.test();
   }
 
   static coinToss()
@@ -20,15 +20,6 @@ export default class Flock
 
     if(ran > 1) return(1);
     else return(0);
-  }
-
-  getSheepOrdinal(id)
-  {
-    for(var i = 0; i < this.sheep.length; i++)
-    {
-      if(this.sheep[i].id === id) return(i);
-    }
-    return(-1);
   }
 
   brand()
@@ -183,12 +174,37 @@ export default class Flock
     if(success === 0) return("Better luck next time!");
 
     var lambID = this.sheep.length;
+    var lambName = "";
     var lambGender = Flock.coinToss();
-    var lamb = new Sheep(lambID, lambGender, this.sire.id, this.dam.id);
+
+    if(lambGender === 0) lambName = "Ewe #"+lambID;
+    else lambName = "Ram #"+lambID;
+
+    var lamb = new Sheep(lambID, lambName, lambGender,
+                         this.sire.id, this.dam.id);
 
     this.sheep.push(lamb);
 
     return("Breeding successful!");
+  }
+
+  add(name, gender)
+  {
+    var newbieID = this.sheep.length;
+    var newbieName = "";
+    var newbieGender = 0;
+
+    if(gender === "Ram") newbieGender = 1;
+
+    if(name !== "") newbieName = name;
+    else if(newbieGender === 0) newbieName = "Ewe #"+newbieID;
+    else newbieName = "Ram #"+newbieID;
+
+    var newbie = new Sheep(newbieID, newbieName, newbieGender, -1, -1);
+
+    this.sheep.push(newbie);
+
+    return("Added "+newbieName+"!");
   }
 
   test()

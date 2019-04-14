@@ -1,8 +1,9 @@
 export default class Sheep
 {
-  constructor(id, gender, sire, dam)
+  constructor(id, name, gender, sire, dam)
   {
     this.id = id;
+    this.name = name;
     // 0 = female, 1 = male.
     this.gender = gender;
     this.branded = false;

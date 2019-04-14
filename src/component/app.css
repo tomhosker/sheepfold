@@ -21,5 +21,8 @@
 
 .mymenu{
   width: 20%;
-  background-color: orange;
+  background-color: purple;
+  padding: 5px;
+  font-size: 20pt;
+  color: lime;
 }

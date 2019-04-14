@@ -15,10 +15,21 @@ class Fleece extends React.Component {
       this.props.text
     ];
 
+    var icon = "assets/fleece.svg";
+
+    if(this.props.branded === true)
+    {
+      if(this.props.ram === true) icon = "assets/brandedram.svg";
+      else icon = "assets/branded.svg";
+    }
+    else if(this.props.ram === true) icon = "assets/ram.svg";
+
     return (
       <div className={className.join(" ").trim()}>
         <button onClick={this.handleClick}>
-          <strong>{this.props.text}{this.props.name}</strong><br/>Select me!
+          <img src={icon} width="120" alt="fleece"/><br/>
+          <strong>{this.props.text}</strong><br/>
+          Select me!
         </button>
       </div>
     );

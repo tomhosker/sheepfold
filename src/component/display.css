@@ -1,6 +1,6 @@
 .component-display {
-  background-color: white;
-  color: black;
+  background-color: purple;
+  color: white;
   text-align: left;
   flex: 0 0 auto;
   width: 100%;
@@ -8,5 +8,7 @@
 
 .component-display > div {
   font-size: 50pt;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
   padding: 0.2rem 0.7rem 0.1rem 0.5rem;
 }

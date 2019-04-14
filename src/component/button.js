@@ -10,10 +10,16 @@ class Button extends React.Component {
   render() {
     const className = ["component-button"];
 
+    var icon = "assets/fire.svg";
+
+    if(this.props.name === "Breed") icon = "assets/heart.svg";
+    else if(this.props.name.indexOf("Add") >= 0) icon = "assets/plus.svg";
+
     return (
       <div className={className.join(" ").trim()}>
         <button onClick={this.handleClick}>
-          <strong>{this.props.name}!</strong>
+          <img src={icon} alt="" width="30"/>
+          <strong> {this.props.name}!</strong>
         </button>
       </div>
     );

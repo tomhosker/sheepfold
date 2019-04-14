@@ -14,7 +14,13 @@ export default function execute(obj, buttonName)
   {
     var breedingMessage = obj.flock.breed();
 
-    return({ message: breedingMessage, flock: obj.flock});
+    return({ message: breedingMessage, flock: obj.flock });
+  }
+  else if(buttonName === "Add")
+  {
+    var addMessage = obj.flock.add(obj.newbieName, obj.newbieGender);
+
+    return({ message: addMessage, flock: obj.flock });
   }
   else
   {

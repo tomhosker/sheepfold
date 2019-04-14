@@ -3,10 +3,10 @@
 }
 
 .component-button button {
-  background-color: orange;
-  color: white;
-  border: 10px blue dotted;
-  font-size: 20pt;
+  background-color: purple;
+  color: lime;
+  border: 10px lime dotted;
+  font-size: 50px;
   padding: 5px;
   display: block;
   width: 100%;
