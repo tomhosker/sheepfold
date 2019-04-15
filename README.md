@@ -1,6 +1,12 @@
 # TheFold: An App for Shepherds
 
-My submission for [https://github.com/WrenKitchensLtd/wren-js-task](Wren's technical test).
+My submission for (Wren's technical test)[https://github.com/WrenKitchensLtd/wren-js-task].
+
+## Installation and Running
+
+* Download this repository.
+* Within the copy of this repository on your machine, run `npm install` and then `npm start`.
+* Hopefully you'll then be directed to webpage suspiciously like the one in the image below.
 
 ## Known Issues
 
