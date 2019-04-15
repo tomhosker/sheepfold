@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import "./display.css";
 
+// This class holds the message display at the top of our app.
 class Display extends React.Component {
   render() {
     return (

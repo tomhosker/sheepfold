@@ -1,5 +1,6 @@
 import Sheep from "./sheep";
 
+// This class holds our app's flock of sheep.
 export default class Flock
 {
   constructor()
@@ -12,6 +13,7 @@ export default class Flock
     this.dam = eve;
   }
 
+  // Handles an event with a 50% probability.
   static coinToss()
   {
     var ran = Math.random()*2;
@@ -20,6 +22,7 @@ export default class Flock
     else return(0);
   }
 
+  // Brands a random sheep (if possible).
   brand()
   {
     var ran = Math.floor(Math.random()*this.sheep.length);
@@ -38,11 +41,12 @@ export default class Flock
     if(this.sheep[ran].branded === true) return(this.brand());
     else
     {
-      this.sheep[ran].branded = true;
+      this.sheep[ran].brand();
       return("Branded!");
     }
   }
 
+  // Nominates a random ram to get lucky!
   generateSire()
   {
     var ran = Math.floor(Math.random()*this.sheep.length);
@@ -55,6 +59,7 @@ export default class Flock
     else this.generateSire();
   }
 
+  // Nominates a random ewe to get lucky!
   generateDam()
   {
     var ran = Math.floor(Math.random()*this.sheep.length);
@@ -67,6 +72,7 @@ export default class Flock
     else this.generateDam();
   }
 
+  // Wraps up the two above methods and checks for incest.
   generateSireAndDam()
   {
     this.generateSire();
@@ -79,6 +85,7 @@ export default class Flock
     }
   }
 
+  // Checks for a lack of unbranded rams.
   noSiresCheck()
   {
     for(var i = 0; i < this.sheep.length; i++)
@@ -92,6 +99,7 @@ export default class Flock
     return(true);
   }
 
+  // Checks for a lack of unbranded ewes.
   noDamsCheck()
   {
     for(var i = 0; i < this.sheep.length; i++)
@@ -105,6 +113,7 @@ export default class Flock
     return(true);
   }
 
+  // Ronseal.
   areParentChild(left, right)
   {
     if((left.sire === right.id) || (left.dam === right.id) ||
@@ -115,6 +124,7 @@ export default class Flock
     else return(false);
   }
 
+  // Ronseal.
   areFullSiblings(left, right)
   {
     if((left.sire === -1) || (left.dam === -1) ||
@@ -129,6 +139,7 @@ export default class Flock
     else return(false);
   }
 
+  // Checks if a given sheep can mate non-incestuously.
   hasLegalMate(i)
   {
     var left = this.sheep[i];
@@ -149,6 +160,7 @@ export default class Flock
     return(false);
   }
 
+  // Checks if any sheep in the flock can mate non-incestuously.
   genePoolCheck()
   {
     for(var i = 0; i < this.sheep.length; i++)
@@ -159,6 +171,7 @@ export default class Flock
     return(true);
   }
 
+  // "Encourages" two random sheep to breed.
   breed()
   {
     if(this.noSiresCheck()) return("No unbranded rams!");
@@ -186,6 +199,7 @@ export default class Flock
     return("Breeding successful!");
   }
 
+  // Adds a named and gendered sheep to the flock.
   add(name, gender)
   {
     var newbieID = this.sheep.length;

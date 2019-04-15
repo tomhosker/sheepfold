@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./fleece.css";
 
+// A "Fleece" is a tile in our app representing a sheep.
 class Fleece extends React.Component {
+  // This stuff handles user input.
   handleClick = () => {
     this.props.clickHandler(this.props.name);
   };
 
+  // Ronseal.
   render() {
     const className = [
       "fleece",

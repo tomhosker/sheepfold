@@ -1,6 +1,7 @@
 import Flock from "./flock";
 import Sheep from "./sheep";
 
+// This function contains the unit tests for the Flock class.
 export default function flockTest()
 {
   var testFlock = new Flock();

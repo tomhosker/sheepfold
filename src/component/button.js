@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./button.css";
 
+// This class holds the species of button on our app's menu.
 class Button extends React.Component {
+  // This stuff handles user input.
   handleClick = () => {
     this.props.clickHandler(this.props.name);
   };
 
+  // Ronseal.
   render() {
     const className = ["component-button"];
 

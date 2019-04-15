@@ -7,6 +7,7 @@ import flockTest from "../logic/flock-test";
 import Flock from "../logic/flock";
 import "./app.css";
 
+// A class to hold our app in toto.
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,27 +23,28 @@ class App extends React.Component {
     // this.test();
   }
 
+  // Runs the unit tests.
   test()
   {
     flockTest();
   }
 
+  // This stuff handles user input.
   handleClick = buttonName => {
     this.setState(execute(this.state, buttonName));
   };
-
   handleChange = event => {
     var newState = this.state;
     newState.newbieGender = event.target.value;
     this.setState(newState);
   };
-
   handleTextChange = event => {
     var newState = this.state;
     newState.newbieName = event.target.value;
     this.setState(newState);
   };
 
+  // Renders a Sheep object into an HTML entity.
   renderSheep(sheep)
   {
     var name = sheep.id.toString();
@@ -63,6 +65,7 @@ class App extends React.Component {
     return(result);
   }
 
+  // Renders a Fold object into an HTML entity.
   renderFold()
   {
     var result = [];
@@ -75,6 +78,7 @@ class App extends React.Component {
     return(result);
   }
 
+  // Builds our menu of buttons, etc.
   renderMenu()
   {
     var message = "Adding a new sheep, sir? "+
@@ -102,6 +106,7 @@ class App extends React.Component {
     return(result);
   }
 
+  // Ronseal.
   render()
   {
     var display = <Display value={this.state.message} />;

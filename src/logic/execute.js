@@ -1,3 +1,5 @@
+// A single function which handles communication between the "component" and
+// "logic" halves of our app.
 export default function execute(obj, buttonName)
 {
   if(isNaN(buttonName) === false)

@@ -1,3 +1,4 @@
+// This class holds an object representing one sheep.
 export default class Sheep
 {
   constructor(id, name, gender, sire, dam)
@@ -11,6 +12,7 @@ export default class Sheep
     this.dam = dam;
   }
 
+  // Brands the sheep represented by this object.
   brand()
   {
     this.branded = true;
