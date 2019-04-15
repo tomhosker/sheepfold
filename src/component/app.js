@@ -3,6 +3,7 @@ import Display from "./display";
 import Fleece from "./fleece";
 import Button from "./button";
 import execute from "../logic/execute";
+import flockTest from "../logic/flock-test";
 import Flock from "../logic/flock";
 import "./app.css";
 
@@ -16,6 +17,14 @@ class App extends React.Component {
       newbieGender: "Ewe",
       newbieName: ""
     };
+
+    // Un-comment the next line to run the unit tests.
+    // this.test();
+  }
+
+  test()
+  {
+    flockTest();
   }
 
   handleClick = buttonName => {

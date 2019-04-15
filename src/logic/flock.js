@@ -10,8 +10,6 @@ export default class Flock
     this.sheep = [adam, eve];
     this.sire = adam;
     this.dam = eve;
-
-    //this.test();
   }
 
   static coinToss()
@@ -205,11 +203,5 @@ export default class Flock
     this.sheep.push(newbie);
 
     return("Added "+newbieName+"!");
-  }
-
-  test()
-  {
-    console.log("Run unit tests on class Flock.");
-    console.log("Tests passed!");
   }
 }
