@@ -1,6 +1,6 @@
 # TheFold: An App for Shepherds
 
-My submission for (Wren's technical test)[https://github.com/WrenKitchensLtd/wren-js-task].
+My submission for [Wren's technical test](https://github.com/WrenKitchensLtd/wren-js-task).
 
 ## Installation and Running
 
