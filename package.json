@@ -1,25 +1,30 @@
 {
   "name": "TheFold",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomhosker/sheepfold"
+  },
+  "description": "My submission for Wren's technical test.",
   "devDependencies": {
-    "chai": "^4.1.2",
-    "gh-pages": "^1.1.0",
-    "prettier": "1.13.0",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^2.1.8"
   },
   "dependencies": {
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "ajv": "^6.10.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.6",
+    "typescript": "^3.4.3",
+    "tar": "^4.4.8"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
+    "build": "react-scripts build"
   },
-  "prettier": {
-    "trailingComma": "all"
-  }
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
