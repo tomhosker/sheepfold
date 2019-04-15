@@ -8,6 +8,8 @@ My submission for [Wren's technical test](https://github.com/WrenKitchensLtd/wre
 * Within the copy of this repository on your machine, run `npm install` and then `npm start`.
 * Hopefully you'll then be directed to webpage suspiciously like the one in the image below.
 
+![a screenshot of the app in action][screenshot]
+
 ## Known Issues
 
 At the time of writing this app has the following known issues:
