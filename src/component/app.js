@@ -47,7 +47,7 @@ class App extends React.Component {
 
     if(sheep.gender === 1) ram = true;
 
-    var result = <Fleece name={name} text={text}
+    var result = <Fleece key={name} name={name} text={text}
                          ram={ram} branded={branded}
                          clickHandler={this.handleClick}/>;
 
