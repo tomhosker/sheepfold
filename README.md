@@ -2,6 +2,8 @@
 
 My submission for [Wren's technical test](https://github.com/WrenKitchensLtd/wren-js-task).
 
+This app was made by (heavily) adapting ahfarmer's [React Calculator](https://github.com/ahfarmer/calculator).
+
 ## Installation and Running
 
 * Download this repository.
